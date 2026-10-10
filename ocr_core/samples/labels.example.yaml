@@ -1,0 +1,22 @@
+# 실제 중계 프레임의 정답 라벨 예시. labels.yaml 로 복사해서 채우면
+# tests/test_samples.py (회귀 테스트) 와 scripts/benchmark.py 가 이 파일을 씁니다.
+#
+# image 는 이 파일 기준 상대 경로, crop 은 정규화 전에 잘라낼 영역입니다(폰 스크린샷 여백 제거용).
+# expected 의 키는 FrameResult.flat() 의 키입니다:
+#   screen, round, slotN.ts, slotN.ks, slotN.team, slotN.eliminated,
+#   leaderboardN.team, leaderboardN.score, resultsN.team, resultsN.<집계 칸 이름>
+# 적은 키만 비교하므로 일부만 라벨링해도 됩니다.
+frames:
+  - image: ingame_01.png
+    crop: [0, 0, 1920, 1080]
+    expected:
+      screen: ingame
+      round: 5
+      slot1.ts: 5.0
+      slot1.ks: 4.0
+      slot1.team: NRG
+      leaderboard1.team: NRG
+      leaderboard1.score: 93
+  - image: camera_01.png
+    expected:
+      screen: camera

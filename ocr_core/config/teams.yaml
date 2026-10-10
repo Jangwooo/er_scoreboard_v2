@@ -1,0 +1,13 @@
+# 팀 별칭 표. 같은 팀이 화면마다 세 가지 형태로 나옵니다.
+#   name_ko: 대기 화면의 한글 정식명
+#   name_en: 인게임 패널의 영문명 (길면 "Gyeongbuk Ascen..."처럼 잘림)
+#   code:    리더보드의 3글자 코드
+# 그 밖의 표기는 aliases 에 넣습니다.
+#
+# TODO: 실제 참가팀으로 채우세요. 아래 코드 4개는 기획 문서에 나온 것이고,
+# 팀 이름과의 대응은 아직 확인되지 않아 비워 두었습니다.
+teams:
+  - {id: NRG, code: NRG, name_en: "", name_ko: "", aliases: []}
+  - {id: GIN, code: GIN, name_en: "", name_ko: "", aliases: []}
+  - {id: JSD, code: JSD, name_en: "", name_ko: "", aliases: []}
+  - {id: BS, code: BS, name_en: "", name_ko: "", aliases: []}

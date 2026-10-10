@@ -1,0 +1,26 @@
+[project]
+name = "er-ocr-core"
+version = "0.1.0"
+description = "이터널 리턴 중계 화면에서 점수 정보를 읽는 OCR 코어"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "opencv-python-headless",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+er-ocr = "ocr_core.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["ocr_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
