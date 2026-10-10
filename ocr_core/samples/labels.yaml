@@ -1,0 +1,95 @@
+# 2026 KEL CIRCUIT 3 유튜브 중계 폰 스크린샷 4장의 정답. 값은 화면을 눈으로 읽어 적었습니다.
+# 폰 스크린샷(3120x1440)이라 crop 으로 좌우 여백을 잘라 영상 영역(2560x1440)만 씁니다.
+frames:
+  - image: Screenshot_20261009_230828_YouTube.jpg
+    crop: [280, 0, 2560, 1440]
+    expected:
+      screen: waiting
+
+  - image: Screenshot_20261009_230846_YouTube.jpg
+    crop: [280, 0, 2560, 1440]
+    expected:
+      screen: camera
+
+  - image: Screenshot_20261009_230900_YouTube.jpg
+    crop: [280, 0, 2560, 1440]
+    expected:
+      screen: ingame
+      round: 6
+      slot1.team: FN
+      slot1.ts: 5.0
+      slot1.ks: 4.0
+      slot1.eliminated: false
+      slot2.team: GSL
+      slot2.ts: 5.0
+      slot2.ks: 5.0
+      slot2.eliminated: true
+      slot3.team: GBA
+      slot3.ts: 6.0
+      slot3.ks: 5.0
+      slot3.eliminated: false
+      slot4.team: DG
+      slot4.ts: 5.0
+      slot4.ks: 4.0
+      slot4.eliminated: false
+      slot5.team: YJS
+      slot5.ts: 9.0
+      slot5.ks: 8.0
+      slot5.eliminated: false
+      slot6.team: INW
+      slot6.ts: 6.0
+      slot6.ks: 5.0
+      slot6.eliminated: false
+      slot7.team: MIR
+      slot7.ts: 6.5
+      slot7.ks: 5.5
+      slot7.eliminated: false
+      slot8.team: GNS          # 관전 중이라 패널이 위로 올라와 있음
+      slot8.ts: 3.5
+      slot8.ks: 2.5
+      slot8.eliminated: false
+      leaderboard1.team: GNS
+      leaderboard1.score: 93
+      leaderboard2.team: FN
+      leaderboard2.score: 75
+      leaderboard3.team: INW
+      leaderboard3.score: 66
+      leaderboard4.team: GBA
+      leaderboard4.score: 60
+      leaderboard5.team: GSL
+      leaderboard5.score: 48.5
+      leaderboard6.team: MIR
+      leaderboard6.score: 47.5
+      leaderboard7.team: YJS
+      leaderboard7.score: 43
+      leaderboard8.team: DG
+      leaderboard8.score: 30
+
+  - image: Screenshot_20261009_230959_YouTube.jpg
+    crop: [280, 0, 2560, 1440]
+    expected:
+      screen: results
+      results1.team: NRG
+      results1.total_fk: 18.0
+      results1.total_points: 32.0
+      results2.team: INW
+      results2.total_fk: 16.0
+      results2.total_points: 29.0
+      results3.team: GBA
+      results3.total_fk: 16.5
+      results3.total_points: 24.5
+      results4.team: GIN
+      results4.total_fk: 13.5
+      results4.total_points: 22.5
+      results5.team: FN
+      results5.total_fk: 16.5
+      results5.total_points: 21.5
+      results6.team: JSD
+      results6.total_fk: 10.5
+      results6.total_points: 16.5
+      results7.team: BS
+      results7.total_fk: 5.5
+      results7.total_points: 13.5
+      results8.team: GNS
+      results8.total_fk: 8.0
+      results8.total_points: 9.0

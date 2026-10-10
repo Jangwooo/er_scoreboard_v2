@@ -2,7 +2,7 @@
 
     python scripts/draw_layout.py samples/ingame_01.png --out /tmp/overlay.png [--crop x,y,w,h]
 
-색: 노랑=화면 분류 probe, 하늘=슬롯 위치 후보, 초록=슬롯 필드(선택된 위치),
+색: 노랑=화면 분류 probe, 하늘=슬롯 강조선 후보, 초록=슬롯 필드(선택된 위치),
     분홍=인게임 리더보드, 주황=집계표, 흰색=라운드 박스
 """
 
@@ -20,7 +20,7 @@ from ocr_core.cli import parse_box  # noqa: E402
 from ocr_core.config import Config  # noqa: E402
 from ocr_core.frame import load_image, normalize  # noqa: E402
 from ocr_core.ingame import locate_panels  # noqa: E402
-from ocr_core.layout import row_box, slot_anchor_box, slot_field_box  # noqa: E402
+from ocr_core.layout import row_box, slot_box, slot_field_box  # noqa: E402
 
 YELLOW, CYAN, GREEN, PINK, ORANGE, WHITE = (0, 255, 255), (255, 255, 0), (0, 255, 0), (255, 0, 255), (0, 140, 255), (255, 255, 255)
 
@@ -54,7 +54,7 @@ def main() -> int:
     slots = ig["slots"]
     for i in range(slots["count"]):
         for y in slots["y_candidates"]:
-            rect(canvas, slot_anchor_box(slots, i, y), CYAN)
+            rect(canvas, slot_box(slots, i, y, slots["anchor"]["strip"]), CYAN)
     for i, y in enumerate(locate_panels(frame, slots)):
         for field in slots["fields"]:
             rect(canvas, slot_field_box(slots, i, y, field), GREEN, f"{i + 1}.{field}")

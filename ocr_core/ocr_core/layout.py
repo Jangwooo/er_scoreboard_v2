@@ -14,12 +14,13 @@ def slot_x(slots: dict, i: int) -> int:
     return slots["origin_x"] + i * slots["pitch_x"]
 
 
-def slot_anchor_box(slots: dict, i: int, panel_y: int) -> Box:
-    return offset(slots["anchor"]["box"], slot_x(slots, i), panel_y)
+def slot_box(slots: dict, i: int, panel_y: int, rel_box) -> Box:
+    """슬롯 i 패널(윗변 y = panel_y) 기준 상대 박스 → 절대 박스."""
+    return offset(rel_box, slot_x(slots, i), panel_y)
 
 
 def slot_field_box(slots: dict, i: int, panel_y: int, field: str) -> Box:
-    return offset(slots["fields"][field]["box"], slot_x(slots, i), panel_y)
+    return slot_box(slots, i, panel_y, slots["fields"][field]["box"])
 
 
 def row_box(table: dict, i: int, box) -> Box:
