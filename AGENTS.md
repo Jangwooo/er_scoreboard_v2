@@ -7,8 +7,8 @@ Guidance for coding agents working in this repository. This file is the single s
 - **Problem**: Eternal Return esports is broadcast on YouTube, but live scores are not shown per team in real time. Viewers have to work out for themselves how many points a team needs to reach the top 4 or win.
 - **Goal**: Read score changes from the stream with OCR and show standings plus advancement/win conditions in real time.
 - **Difficulty**: Medium overall. Most of the hard work is in the OCR core: one misread goes straight to every viewer, so stability matters more than anything.
-- **Current state**: OCR core reads a YouTube link or video file with yt-dlp + ffmpeg (1 fps) and prints changed values to the console. The backend starts it over HTTP with the stream URL and the participating teams. tesseract runs in-process (~0.1 s per in-game frame). Accuracy is still only checked on 4 sample frames.
-- **Next**: Try it on a real live stream and label frames from past VODs; then multi-frame voting and score events to the backend.
+- **Current state**: OCR core reads a YouTube link or video file with yt-dlp + ffmpeg (1 fps) and prints changed values to the console. The backend starts it over HTTP with the stream URL and the participating teams. tesseract runs in-process (~0.1 s per in-game frame). First live run (KEL Circuit 4, ~15 min, see `ocr_core/samples/live_logs/`): teams match, but TS/KS, leaderboard scores, elimination marks and the round number flicker frame to frame.
+- **Next**: Multi-frame voting and rule checks (roadmap 4) to stop the flicker; capture live frames to fix leaderboard decimal validation and the skull threshold; then score events to the backend.
 
 ## Architecture
 
@@ -98,7 +98,7 @@ Each component has its own `AGENTS.md` for setup, commands, file layout, compone
 
 | Folder | Guide | Status |
 | --- | --- | --- |
-| `ocr_core/` | [ocr_core/AGENTS.md](ocr_core/AGENTS.md) | Reads a stream URL (yt-dlp + ffmpeg) and prints changed values; HTTP API for the backend; ~0.1 s per in-game frame; accuracy checked on 4 samples only |
+| `ocr_core/` | [ocr_core/AGENTS.md](ocr_core/AGENTS.md) | Reads a stream URL (yt-dlp + ffmpeg) and prints changed values; HTTP API for the backend; ~0.1 s per in-game frame; first live run shows flickering values |
 
 ## Roadmap
 

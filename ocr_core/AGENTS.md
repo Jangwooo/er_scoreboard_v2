@@ -105,7 +105,6 @@ Benchmark on the 40 known numbers:
 
 ## Not implemented yet
 
-- Not tested against a real YouTube live stream yet (only a local video built from the samples).
 - No score event output to the backend; changed values only go to the console.
 - No multi-frame voting or rule checks: a single-frame misread shows up as a change (roadmap step 4).
 - No region-level change detection; every sampled frame is fully read (roadmap step 3).
@@ -114,6 +113,13 @@ Benchmark on the 40 known numbers:
 ## Known limitations
 
 - Validated on only 4 phone screenshots; coordinates and thresholds were calibrated on those same 4.
+- First live run, 2026-10-11, KEL Circuit 4 round 3 (`samples/live_logs/`, team list in the same folder). Teams matched almost every frame (two 1-frame swaps to ROX). Not checked against ground truth. Problems seen:
+  - TS/KS often go to `review` (about a third of frames have one); on one run all 16 were in `review` on the first in-game frame.
+  - TS always read equal to KS, against the TS−KS = 1 hypothesis; unclear whether that is real or the extractor reading one value twice.
+  - Leaderboard scores flip 7.5↔75.0 and 15.0↔1.0: the leaderboard format allows integers, so a dropped decimal or digit passes validation.
+  - Elimination marks flip False↔True; the 0.80 skull threshold looks wrong for compressed live video.
+  - Round read as 30 for one frame; 1–2 s `unknown` frames appear mid in-game.
+  - tesseract prints debug statistics (`Total count=0 …`) to the console for empty crops.
 - The result cache only hits on byte-identical crops; live video has compression noise, so the hit rate may be low.
 - Teams NRG, GIN, JSD, BS: only the codes are confirmed; name mappings are guesses.
 - The skull template comes from a single sample scene; the 0.80 threshold is untested at other resolutions or compression levels.
