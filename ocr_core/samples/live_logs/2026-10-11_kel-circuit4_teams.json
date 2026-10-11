@@ -1,0 +1,10 @@
+{"teams": [
+  {"code": "GBA", "names": ["경북 어센더스", "Gyeongbuk Ascenders"]},
+  {"code": "DTS", "names": ["대전오토암즈", "대전 오토암즈", "DEAJEON Autoarms", "DAEJEON Autoarms"]},
+  {"code": "BS", "names": ["GC 부산 스텔라", "GC Busan Stella"]},
+  {"code": "ROX", "names": ["성남 락스", "Seongnam ROX"]},
+  {"code": "GNS", "names": ["경남 스파클", "Gyeongnam Sparkle"]},
+  {"code": "INW", "names": ["인천 웨이브", "INCHEON WAVE"]},
+  {"code": "FN", "names": ["FN 세종", "FN SEJONG"]},
+  {"code": "YJS", "names": ["양주 웨일즈", "YJ Whales"]}
+]}
