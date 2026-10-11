@@ -88,6 +88,25 @@ class Tesseract:
         return r.stdout.decode("utf-8", "replace").strip()
 
 
+def make_tesseract(settings: dict) -> tuple[OcrFn, str | None]:
+    """layout.yaml 의 tesseract 설정으로 OCR 함수를 만듭니다. (OCR 함수, 경고 또는 None).
+
+    backend: lib → libtesseract 를 프로세스 안에 띄워 두고 재사용 (기본, 빠름)
+    backend: cli → 호출마다 tesseract 프로세스 실행 (느림, 비교·디버깅용)
+    """
+    from .tessapi import TesseractLib
+
+    settings = dict(settings)
+    backend = settings.pop("backend", "lib")
+    if backend == "lib":
+        if TesseractLib.available():
+            return TesseractLib(lang=settings.get("lang", "eng")), None
+        return Tesseract(**settings), "libtesseract 를 찾지 못해 tesseract CLI 로 읽습니다 (느림)"
+    if backend == "cli":
+        return Tesseract(**settings), None
+    raise ValueError(f"알 수 없는 tesseract backend: {backend}")
+
+
 def _foreground_mask(gray: np.ndarray) -> np.ndarray:
     _, mask = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     if np.count_nonzero(mask) > mask.size / 2:  # 글자를 소수 클래스로 봄

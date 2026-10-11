@@ -13,6 +13,29 @@ def normalize_name(text: str) -> str:
     return "".join(ch for ch in text.upper() if ch.isalnum())
 
 
+def teams_from_request(items: object) -> list[dict]:
+    """백엔드가 보낸 참가팀 목록을 TeamMatcher 형식으로 바꿉니다.
+
+    입력: [{"code": "GBA", "names": ["경북 어센더스", "Gyeongbuk Ascension"]}, ...]
+    code 가 팀 id 가 되고, names 의 모든 표기(한글명, 영문명 등)가 별칭이 됩니다.
+    """
+    if not isinstance(items, list) or not items:
+        raise ValueError("teams 는 비어 있지 않은 배열이어야 합니다")
+    teams, seen = [], set()
+    for item in items:
+        if not isinstance(item, dict) or not isinstance(item.get("code"), str) or not item["code"].strip():
+            raise ValueError(f"팀마다 문자열 code 가 필요합니다: {item!r}")
+        code = item["code"].strip()
+        names = item.get("names") or []
+        if not isinstance(names, list) or not all(isinstance(n, str) for n in names):
+            raise ValueError(f"names 는 문자열 배열이어야 합니다: {code}")
+        if code in seen:
+            raise ValueError(f"code 가 중복됩니다: {code}")
+        seen.add(code)
+        teams.append({"id": code, "code": code, "aliases": [n for n in names if n.strip()]})
+    return teams
+
+
 class TeamMatcher:
     def __init__(self, teams: list[dict], min_score: float = 0.6):
         self.min_score = min_score

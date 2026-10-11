@@ -11,7 +11,7 @@ Guidance for working in `ocr_core/`. The plan, tournament rules, broadcast scree
 
 ```bash
 cd ocr_core
-sudo apt install tesseract-ocr        # system dependency
+sudo apt install tesseract-ocr ffmpeg  # system dependencies (libtesseract comes with tesseract-ocr)
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[dev]'
 ```
@@ -24,9 +24,29 @@ Run everything from `ocr_core/`.
 pytest                                                   # full test suite (needs tesseract)
 python -m ocr_core frame.png --pretty                    # read one 1920x1080 frame
 python -m ocr_core shot.jpg --crop 280,0,2560,1440       # phone screenshot sample
+python -m ocr_core stream <youtube-url|file> --teams teams.json   # read a stream, print changed values
+python -m ocr_core serve --port 8100                     # HTTP API for the backend (see Stream API)
 python scripts/draw_layout.py frame.png --out /tmp/overlay.png   # draw layout boxes for calibration
 python scripts/benchmark.py samples/labels.yaml          # accuracy per preprocessing variant
 ```
+
+## Stream API
+
+The backend starts reading a stream with one HTTP request; only one match is read at a time.
+
+```
+POST   /streams  {"url": "https://www.youtube.com/watch?v=...",
+                  "teams": [{"code": "GBA", "names": ["경북 어센더스", "Gyeongbuk Ascension"]}, ...]}
+                 → 202 started / 400 bad request / 409 already reading
+GET    /streams  → current (or last) session status: state, frames, dropped, last_ms, error
+DELETE /streams  → stop
+```
+
+- `teams` comes from the backend, so the OCR core only does OCR. `code` becomes the team id; every entry in `names` (Korean name, English panel name, …) is an alias. `config/teams.yaml` is only the fallback for the single-frame CLI and the sample tests.
+- YouTube links are resolved with yt-dlp; local files and other URLs go straight to ffmpeg. ffmpeg samples `stream.fps` frames per second (default 1) scaled to 1920×1080.
+- Live input drops stale frames and always reads the newest one if OCR falls behind; files are read frame by frame without dropping.
+- Changed values are printed to stdout per frame (`ocr_core/changes.py`). Fields in `review` or unreadable (`null`) never count as changes; the last value is kept. Waiting and camera screens only print the screen switch.
+- The score event format sent to the backend is not defined yet; output is console only.
 
 ## Pipeline
 
@@ -34,7 +54,7 @@ python scripts/benchmark.py samples/labels.yaml          # accuracy per preproce
 2. **Classify** the screen with fixed probes (color regions, templates) from `layout.yaml`.
 3. **In-game extraction** (provisional): round number; per slot TS/KS, team name and elimination (skull template, threshold 0.80); bottom-right cumulative leaderboard. The "TS x KS y" line is right-aligned, so white values and grey labels are split by brightness and the two rightmost blobs are TS and KS.
 4. **Results extraction** (final): team per rank and table values.
-5. **Digit reading**: fast path = tight crop → 4× upscale → Otsu → tesseract psm 7. If format validation fails (e.g. decimal required, 0.5 steps), retry with 4 variants including psm 13 and take a majority vote. Identical crops are served from a byte cache. Low-confidence or unreadable fields go to `review`.
+5. **Digit reading**: fast path = tight crop → 4× upscale → Otsu → tesseract psm 7. tesseract runs in-process through the libtesseract C API (`tessapi.py`, ctypes): each worker thread (`ocr.workers`, 4) creates one engine on first use and keeps it until `OcrCore.close()`, i.e. until the stream ends. `tesseract.backend: cli` switches back to one process per call. If format validation fails (e.g. decimal required, 0.5 steps), retry with 4 variants including psm 13 and take a majority vote. Identical crops are served from a byte cache. Low-confidence or unreadable fields go to `review`.
 6. **Team matching**: Korean name, truncated English name and code all resolve to one id in `config/teams.yaml`.
 
 | File | Role |
@@ -46,11 +66,16 @@ python scripts/benchmark.py samples/labels.yaml          # accuracy per preproce
 | `ocr_core/frame.py` | Normalize, crop, color fraction, template matching |
 | `ocr_core/classifier.py` | Screen classifier |
 | `ocr_core/digits.py` | Digit/text reading, format validation, majority vote, cache |
+| `ocr_core/tessapi.py` | libtesseract via ctypes; one long-lived engine per thread |
 | `ocr_core/teams.py` | Team alias matching |
 | `ocr_core/ingame.py`, `results.py` | In-game and results extractors |
 | `ocr_core/runner.py` | Runs field reads in parallel on a thread pool |
 | `ocr_core/pipeline.py` | `OcrCore`: full flow and review decisions |
 | `ocr_core/labels.py` | Loads ground truth labels for tests and the benchmark |
+| `ocr_core/stream.py` | Source resolution (yt-dlp), ffmpeg frame reader, `StreamSession` |
+| `ocr_core/changes.py` | Compares frames and formats changed values for the console |
+| `ocr_core/server.py` | HTTP API (`POST/GET/DELETE /streams`) |
+| `ocr_core/cli.py` | Single-frame, `stream` and `serve` commands |
 | `scripts/draw_layout.py` | Draws config boxes on a frame for calibration |
 | `scripts/benchmark.py` | Accuracy per preprocessing variant against labels |
 
@@ -72,19 +97,23 @@ Benchmark on the 40 known numbers:
 - A bold "60" was only read by psm 13, which is why the fallback vote includes psm 13.
 - No-Otsu was the least stable and often fell through to the slow path.
 
-**Speed** (2 cores, after parallelizing): in-game 14.6 s → 7.6 s per frame, results 7.0 s → 3.8 s. Spawning a tesseract process per call dominates. Too slow for live.
+**Speed** (2 cores, after parallelizing): in-game 14.6 s → 7.6 s per frame, results 7.0 s → 3.8 s. Spawning a tesseract process per call dominates.
+
+**Speed with in-process libtesseract** (8-core aarch64, same 4 samples, cache off): in-game 1.9 s → 0.1 s per frame, results 1.2 s → 0.08 s, versus the CLI backend on the same machine. Output is identical to the CLI on all 240 benchmark calls. The first frame takes a few hundred ms longer while the engines load.
+
+**Stream check**: the 4 samples encoded as an H.264 video (1920×1080) and read through `stream` matched all 73 label values.
 
 ## Not implemented yet
 
-- No video input: nothing reads a stream URL or video file yet (no yt-dlp, ffmpeg or frame sampling). The CLI reads one image at a time.
-- No score event output to the backend; the only output is `FrameResult` JSON.
-- No multi-frame voting, change detection or rule checks (see the roadmap in the root AGENTS.md).
+- Not tested against a real YouTube live stream yet (only a local video built from the samples).
+- No score event output to the backend; changed values only go to the console.
+- No multi-frame voting or rule checks: a single-frame misread shows up as a change (roadmap step 4).
+- No region-level change detection; every sampled frame is fully read (roadmap step 3).
 - Digits are still read by tesseract; `matchTemplate` is only used for the skull mark.
 
 ## Known limitations
 
 - Validated on only 4 phone screenshots; coordinates and thresholds were calibrated on those same 4.
-- ~7.6 s per in-game frame.
 - The result cache only hits on byte-identical crops; live video has compression noise, so the hit rate may be low.
 - Teams NRG, GIN, JSD, BS: only the codes are confirmed; name mappings are guesses.
 - The skull template comes from a single sample scene; the 0.80 threshold is untested at other resolutions or compression levels.
@@ -98,7 +127,8 @@ The cross-component rules (doubtful values go to `review`, provisional vs final 
 
 ## Testing
 
-- Run `pytest` after every change; everything must pass (26 tests today).
+- Run `pytest` after every change; everything must pass (37 tests today).
+- In a fresh venv (OpenCV/numpy from pip), the two tests in `test_pipeline_synthetic.py` fail on the leaderboard code and a results value even before the stream change; with Debian's `python3-opencv` all pass. Not investigated yet.
 - `tests/test_samples.py` is a regression test on real broadcast frames from `samples/labels.yaml`. If it fails, accuracy dropped: do not edit expected values to make it pass. Change a label only with evidence the label itself is wrong.
 - When handling a new screen or tournament, add frames to `samples/` and their ground truth to `labels.yaml` (format in `labels.example.yaml`). Prefer real 1920×1080 stream frames over phone screenshots.
 - Keep the logic tests (`test_digits.py`, `test_teams.py`, `test_classifier.py`) runnable without tesseract.

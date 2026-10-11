@@ -1,15 +1,15 @@
 # OCR 코어
 
-이터널 리턴 e스포츠 중계 프레임에서 점수 정보를 읽는 모듈입니다. 프레임 한 장을 받아 화면 종류를 분류하고, 인게임 화면과 집계 화면에서 값을 읽어 JSON으로 돌려줍니다. 기획과 1단계 결과는 [AGENTS.md](../AGENTS.md)에 정리되어 있습니다.
+이터널 리턴 e스포츠 중계 프레임에서 점수 정보를 읽는 모듈입니다. 프레임 한 장을 받아 화면 종류를 분류하고, 인게임 화면과 집계 화면에서 값을 읽어 JSON으로 돌려줍니다. 유튜브 링크나 영상 파일을 주면 ffmpeg로 프레임을 뽑아 계속 읽고, 바뀐 값을 콘솔에 출력합니다. 기획과 1단계 결과는 [AGENTS.md](../AGENTS.md)에 정리되어 있습니다.
 
 > `config/layout.yaml`은 2026 KEL CIRCUIT 3 유튜브 중계 샘플 4장(대기, 현장 카메라, 인게임, 집계)으로 보정했습니다. 이 4장에서 화면 분류와 모든 값(숫자 40개, 팀 24개, 라운드, 전멸 표시)이 정답과 일치합니다. 검증한 프레임이 4장뿐이라 실제 방송 전체에서의 정확도는 아직 모릅니다.
 
 ## 설치
 
-시스템에 `tesseract`가 있어야 합니다.
+시스템에 `tesseract`(libtesseract 포함)와 `ffmpeg`가 있어야 합니다.
 
 ```bash
-sudo apt install tesseract-ocr          # Debian/Ubuntu
+sudo apt install tesseract-ocr ffmpeg   # Debian/Ubuntu
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[dev]'
 ```
@@ -19,6 +19,38 @@ pip install -e '.[dev]'
 ```bash
 python -m ocr_core frame.png --pretty
 python -m ocr_core shot.jpg --crop 280,0,2560,1440   # 3120x1440 폰 스크린샷의 좌우 여백 제거
+```
+
+### 스트림
+
+```bash
+python -m ocr_core stream "https://www.youtube.com/watch?v=..." --teams teams.json   # 유튜브 라이브/영상
+python -m ocr_core stream vod.mp4 --teams teams.json                               # 영상 파일
+python -m ocr_core serve --port 8100                                               # 백엔드용 HTTP 서버
+```
+
+`teams.json`은 백엔드 요청의 `teams`와 같은 형식입니다. `--teams`를 빼면 `config/teams.yaml`을 씁니다.
+
+```json
+{"teams": [{"code": "GBA", "names": ["경북 어센더스", "Gyeongbuk Ascension"]}, {"code": "NRG"}]}
+```
+
+백엔드는 HTTP로 읽기를 시작하고 멈춥니다. 한 번에 한 경기만 읽습니다.
+
+```
+POST   /streams   {"url": "...", "teams": [...]}   → 202 시작 / 400 요청 오류 / 409 이미 읽는 중
+GET    /streams                                     → 현재 세션 상태
+DELETE /streams                                     → 중지
+```
+
+- 유튜브 링크는 yt-dlp로 실제 영상 주소를 얻어 ffmpeg에 넘깁니다. 프레임은 `layout.yaml`의 `stream.fps`(기본 1장/초)로 뽑아 1920×1080으로 맞춥니다.
+- 라이브는 OCR이 밀리면 오래된 프레임을 버리고 최신 프레임을 읽습니다. 파일은 버리지 않습니다.
+- 프레임마다 이전 값과 비교해 바뀐 필드만 출력합니다. `review`에 든 필드나 읽지 못한 필드는 변경으로 보지 않습니다.
+
+```
+[00:00:04] #4 ingame R6 (98 ms)
+  slot1.ts  5.0 → 6.0
+  slot1.ks  4.0 → 5.0
 ```
 
 ```python
@@ -43,6 +75,7 @@ with OcrCore() as core:
 4. **집계 추출**(확정값): 순위별 팀명과 집계표 숫자를 읽습니다.
 5. **숫자 읽기**: 숫자를 읽고 결과를 검증합니다.
    - 먼저 빠른 경로(타이트 크롭 → 4배 확대 → Otsu → tesseract psm 7)로 읽습니다.
+   - tesseract는 프로세스를 매번 띄우지 않고 libtesseract를 프로세스 안에서 부릅니다. 워커 스레드마다 엔진을 하나씩 띄워 스트림이 끝날 때까지 재사용합니다(`tesseract.backend: lib`).
    - 결과가 형식 검증(예: 소수점 필수, 0.5 단위)에 실패하면 psm 13을 포함한 4개 변형으로 다시 읽어 다수결합니다.
    - 같은 바이트의 크롭은 캐시에서 바로 돌려줍니다.
    - 신뢰도가 `min_confidence`보다 낮거나 읽지 못한 필드는 `review` 목록에 들어갑니다.
@@ -59,6 +92,10 @@ with OcrCore() as core:
 | `ocr_core/frame.py` | 정규화, crop, 색상 비율, 템플릿 매칭 |
 | `ocr_core/classifier.py` | 화면 분류기 |
 | `ocr_core/digits.py` | 숫자·텍스트 읽기, 형식 검증, 다수결, 캐시 |
+| `ocr_core/tessapi.py` | libtesseract를 ctypes로 호출, 스레드마다 엔진 하나를 유지 |
+| `ocr_core/stream.py` | yt-dlp로 주소 얻기, ffmpeg 프레임 읽기, 스트림 세션 |
+| `ocr_core/changes.py` | 이전 프레임과 비교해 바뀐 값 고르기, 콘솔 출력 형식 |
+| `ocr_core/server.py` | 백엔드용 HTTP API |
 | `ocr_core/teams.py` | 팀 별칭 매칭 |
 | `ocr_core/ingame.py`, `results.py` | 인게임·집계 추출기 |
 | `ocr_core/pipeline.py` | `OcrCore`: 전체 흐름과 검토 필드 판정 |
@@ -97,12 +134,14 @@ pytest
 - `test_digits.py`, `test_teams.py`, `test_classifier.py`: tesseract 없이 도는 로직 테스트입니다.
 - `test_pipeline_synthetic.py`: 설정 좌표대로 그린 합성 프레임으로 파이프라인 전체를 tesseract와 함께 돌립니다. 실제 방송 정확도가 아니라, 구성 요소가 서로 맞물리는지를 확인합니다.
 - `test_samples.py`: `samples/labels.yaml`의 실제 프레임으로 회귀 테스트를 합니다.
+- `test_stream.py`: 변경 추적, 참가팀 요청 검증, 소스 판별, ffmpeg 프레임 읽기를 확인합니다(ffmpeg가 없으면 마지막 테스트는 건너뜀).
 
 ## 아직 하지 않은 것
 
 기획 문서의 다음 단계에 해당하는 부분입니다.
 
-- 스트림이나 VOD에서 프레임 가져오기 (ffmpeg, yt-dlp)
+- 실제 유튜브 라이브로 시험 (지금은 샘플로 만든 영상으로만 확인)
+- 백엔드로 점수 이벤트 보내기 (지금은 콘솔 출력만)
 - 여러 프레임 다수결과 규칙 검증 (점수 감소 불가, 라운드 순차 증가)
 - tesseract 대신 숫자 템플릿 매칭으로 속도 개선
 - 변화 감지로 바뀌지 않은 영역 다시 읽지 않기

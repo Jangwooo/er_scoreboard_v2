@@ -7,8 +7,8 @@ Guidance for coding agents working in this repository. This file is the single s
 - **Problem**: Eternal Return esports is broadcast on YouTube, but live scores are not shown per team in real time. Viewers have to work out for themselves how many points a team needs to reach the top 4 or win.
 - **Goal**: Read score changes from the stream with OCR and show standings plus advancement/win conditions in real time.
 - **Difficulty**: Medium overall. Most of the hard work is in the OCR core: one misread goes straight to every viewer, so stability matters more than anything.
-- **Current state**: OCR core stage 1 works on 4 sample frames (screen classification, in-game and results extraction, all values correct). It is too slow for live use (~7.6 s per in-game frame).
-- **Next**: Label frames from past VODs, then replace digit OCR with template matching.
+- **Current state**: OCR core reads a YouTube link or video file with yt-dlp + ffmpeg (1 fps) and prints changed values to the console. The backend starts it over HTTP with the stream URL and the participating teams. tesseract runs in-process (~0.1 s per in-game frame). Accuracy is still only checked on 4 sample frames.
+- **Next**: Try it on a real live stream and label frames from past VODs; then multi-frame voting and score events to the backend.
 
 ## Architecture
 
@@ -21,7 +21,7 @@ YouTube stream ──URL──▶ OCR core ──score events──▶ Main back
 
 | Component | Responsibility | Stack | Difficulty | Status |
 | --- | --- | --- | --- | --- |
-| OCR core (`ocr_core/`) | Reads the stream, extracts and validates values, emits score changes | Python 3.11+, OpenCV, tesseract, ffmpeg, yt-dlp | Medium-high | Stage 1 done |
+| OCR core (`ocr_core/`) | Reads the stream, extracts and validates values, emits score changes | Python 3.11+, OpenCV, tesseract, ffmpeg, yt-dlp | Medium-high | Stream input works; events to backend not yet |
 | Main backend | Creates tracked matches, passes the stream URL to the OCR core, applies score events, pushes to users | FastAPI (Python everywhere) or Node/TypeScript, PostgreSQL, Redis, SSE | Medium-low | Not started |
 | Frontend | Users: live score page, past matches with per-round points. Admin: create matches to track, manual score adjustments during a match, other admin tasks | Next.js (React); admin pages in the same app behind auth | Low-medium | Not started |
 | DB | Per-round results of past matches (matches, rounds, team scores) | PostgreSQL | Low | Not started |
@@ -89,7 +89,7 @@ These hold across components. Each component's own AGENTS.md links here instead 
 - **Never auto-apply a doubtful value.** A field that could not be read, falls below `min_confidence`, or fails format validation goes into `review` for admin confirmation. Do not guess. Accuracy comes before speed. Manual adjustment in the admin page is the safety net.
 - **In-game values are provisional; results-screen values are final.** Waiting and camera screens are classified but not read, and the service keeps the last confirmed values.
 - **Result keys are a contract.** The keys from the OCR core's `FrameResult.flat()` (`round`, `slotN.ts`, `leaderboardN.score`, …) are shared with the label files and the future backend. If you change them, update `ocr_core/samples/labels.yaml`, the tests and the READMEs together.
-- Team ids are the 3-letter codes in `ocr_core/config/teams.yaml`.
+- **Teams come from the backend.** When the backend starts a stream (`POST /streams` on the OCR core, see `ocr_core/AGENTS.md`), it sends the participating teams as `[{"code": "GBA", "names": ["경북 어센더스", "Gyeongbuk Ascension"]}, ...]`. `code` is the team id in every OCR result; `names` are the aliases the OCR text is matched against. The OCR core keeps no team list of its own for streams.
 - The score event format (OCR core → backend) and the SSE payload (backend → frontend) are not defined yet. Define them here when they are, not in a component file.
 
 ## Components
@@ -98,16 +98,16 @@ Each component has its own `AGENTS.md` for setup, commands, file layout, compone
 
 | Folder | Guide | Status |
 | --- | --- | --- |
-| `ocr_core/` | [ocr_core/AGENTS.md](ocr_core/AGENTS.md) | Stage 1 done: one frame is read correctly on 4 samples; no stream input, ~7.6 s per in-game frame |
+| `ocr_core/` | [ocr_core/AGENTS.md](ocr_core/AGENTS.md) | Reads a stream URL (yt-dlp + ffmpeg) and prints changed values; HTTP API for the backend; ~0.1 s per in-game frame; accuracy checked on 4 samples only |
 
 ## Roadmap
 
 The most important thing now is measuring accuracy on real broadcast frames; 4 samples say nothing about a full broadcast.
 
 1. **Label VOD frames**: collect frames from past VODs, label ground truth and extend the evaluation script. Verify the TS meaning (kills + guaranteed placement points) at the same time.
-2. **Digit template matching**: digits use a fixed font, so replace tesseract with a template-matching classifier that reads in milliseconds. Keep tesseract for team names and labels only.
+2. **Digit template matching**: digits use a fixed font, so replace tesseract with a template-matching classifier that reads in milliseconds. Keep tesseract for team names and labels only. Less urgent now that in-process libtesseract reads an in-game frame in ~0.1 s; mainly worth it if accuracy on VODs is better.
 3. **Change detection** (tolerance-based): skip regions that did not change; read team names once per slot.
-4. **Multi-frame voting and rule checks**: sample ~1 fps with ffmpeg and confirm values by majority across frames. Rules: scores never decrease, round numbers increase in order. On a violation, hold the value and alert the admin. Add VOD and live frame feeds (yt-dlp, ffmpeg).
+4. **Multi-frame voting and rule checks**: sample ~1 fps with ffmpeg and confirm values by majority across frames. Rules: scores never decrease, round numbers increase in order. On a violation, hold the value and alert the admin. The live/VOD frame feed (yt-dlp, ffmpeg) is done; voting goes on top of `ocr_core/changes.py`.
 5. **Score engine**: advancement/win conditions as pure logic with tests. It can be built and tested without OCR.
 
 ## Risks

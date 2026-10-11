@@ -11,12 +11,18 @@ frame:
   height: 1080
 
 tesseract:
-  cmd: tesseract
+  backend: lib          # lib: libtesseract 엔진을 스레드마다 띄워 두고 재사용 / cli: 호출마다 프로세스 실행
+  cmd: tesseract        # backend: cli 일 때만 씀
   lang: eng
   timeout: 10.0
 
+stream:
+  fps: 1                # 스트림에서 초당 몇 장을 읽을지. 라이브에서 OCR 이 밀리면 오래된 프레임은 버림
+  ytdlp_format: 'bv*[height<=1080]/b'   # 유튜브 링크일 때 yt-dlp 형식 선택
+  ffmpeg: ffmpeg
+
 ocr:
-  workers: 4            # 필드를 병렬로 읽는 스레드 수
+  workers: 4            # 필드를 병렬로 읽는 스레드 수. backend: lib 이면 스레드마다 tesseract 엔진 하나
   cache_size: 4096      # 같은 바이트의 크롭은 다시 읽지 않음
   min_confidence: 0.4   # 이보다 낮으면 자동 반영하지 않고 관리자 확인으로 넘김
 

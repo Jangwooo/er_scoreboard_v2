@@ -9,7 +9,7 @@ import numpy as np
 
 from .classifier import ScreenClassifier
 from .config import Config
-from .digits import OcrFn, Reader, Tesseract
+from .digits import OcrFn, Reader, make_tesseract
 from .frame import Box, TemplateDetector, normalize
 from .ingame import read_ingame
 from .models import FrameResult
@@ -18,12 +18,28 @@ from .teams import TeamMatcher
 
 
 class OcrCore:
-    def __init__(self, config: Config | None = None, ocr: OcrFn | None = None, workers: int | None = None):
+    def __init__(
+        self,
+        config: Config | None = None,
+        ocr: OcrFn | None = None,
+        workers: int | None = None,
+        teams: list[dict] | None = None,
+    ):
+        """teams: 이번 경기 참가팀. 스트림은 백엔드 요청으로 받은 팀을 넘기고, 없으면 config/teams.yaml 을 씁니다.
+
+        tesseract 엔진은 워커 스레드마다 하나씩 뜨고 close() 할 때까지 유지됩니다.
+        """
         self.config = config or Config.load()
         layout = self.config.layout
         ocr_cfg = layout["ocr"]
-        self.reader = Reader(ocr or Tesseract(**layout.get("tesseract", {})), self.config.number_kinds(), ocr_cfg["cache_size"])
-        self.matcher = TeamMatcher(self.config.teams, layout["teams"]["min_score"])
+        self.init_warnings: list[str] = []
+        if ocr is None:
+            ocr, warning = make_tesseract(layout.get("tesseract", {}))
+            if warning:
+                self.init_warnings.append(warning)
+        self.ocr = ocr
+        self.reader = Reader(ocr, self.config.number_kinds(), ocr_cfg["cache_size"])
+        self.matcher = TeamMatcher(self.config.teams if teams is None else teams, layout["teams"]["min_score"])
         self.classifier = ScreenClassifier(layout["classifier"], self.config.base_dir)
         skull = layout["ingame"]["slots"]["fields"]["skull"]
         self.skull = TemplateDetector(self.config.path(skull["template"]), skull["threshold"])
@@ -32,6 +48,9 @@ class OcrCore:
 
     def close(self) -> None:
         self.pool.shutdown()
+        close = getattr(self.ocr, "close", None)
+        if close:
+            close()  # 워커 스레드가 모두 끝난 뒤에 엔진 해제
 
     def __enter__(self) -> OcrCore:
         return self
@@ -43,7 +62,7 @@ class OcrCore:
         started = time.perf_counter()
         frame = normalize(img, self.config.frame_size, crop)
         screen, scores = self.classifier.classify(frame)
-        result = FrameResult(screen=screen, screen_scores=scores, warnings=list(self.classifier.warnings))
+        result = FrameResult(screen=screen, screen_scores=scores, warnings=[*self.init_warnings, *self.classifier.warnings])
         if not self.config.calibrated:
             result.warnings.append("layout.yaml 좌표가 아직 보정되지 않았습니다 (calibrated: false)")
 

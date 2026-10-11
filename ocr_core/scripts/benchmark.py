@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from ocr_core import ingame, results  # noqa: E402
 from ocr_core.config import Config  # noqa: E402
-from ocr_core.digits import BENCHMARK_VARIANTS, Reader, Tesseract  # noqa: E402
+from ocr_core.digits import BENCHMARK_VARIANTS, Reader, make_tesseract  # noqa: E402
 from ocr_core.frame import load_image, normalize  # noqa: E402
 from ocr_core.labels import load_labels  # noqa: E402
 
@@ -29,7 +29,10 @@ def main() -> int:
 
     cfg = Config.load(args.config)
     L = cfg.layout
-    reader = Reader(Tesseract(**L.get("tesseract", {})), cfg.number_kinds(), cache_size=0)
+    ocr, warning = make_tesseract(L.get("tesseract", {}))
+    if warning:
+        print(warning)
+    reader = Reader(ocr, cfg.number_kinds(), cache_size=0)
 
     cases = []  # (필드 키, 크롭, 종류, 정답)
     for frame_label in load_labels(args.labels):

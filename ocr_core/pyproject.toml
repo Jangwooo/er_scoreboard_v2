@@ -7,6 +7,7 @@ dependencies = [
     "numpy",
     "opencv-python-headless",
     "pyyaml",
+    "yt-dlp",  # 유튜브 링크 → 실제 영상 주소. 유튜브가 자주 바뀌니 수시로 업데이트
 ]
 
 [project.optional-dependencies]
