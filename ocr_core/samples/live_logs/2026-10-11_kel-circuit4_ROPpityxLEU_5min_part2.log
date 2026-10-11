@@ -1,0 +1,440 @@
+[stream] 시작: [🔴LIVE] 승자조 | KEL 서킷4 | 2026 대한민국 이스포츠 리그 2026-10-11 09:37 (라이브, 1.0 fps)
+[00:00:00] #0 ingame R3 (163 ms)
+  screen              - → ingame
+  round               - → 3
+  slot1.team          - → GBA
+  slot1.eliminated    - → False
+  slot2.team          - → DTS
+  slot2.eliminated    - → False
+  slot3.team          - → BS
+  slot3.eliminated    - → False
+  slot4.team          - → ROX
+  slot4.eliminated    - → False
+  slot5.team          - → INW
+  slot5.eliminated    - → False
+  slot6.team          - → GNS
+  slot6.eliminated    - → False
+  slot7.team          - → FN
+  slot7.eliminated    - → False
+  slot8.team          - → YJS
+  slot8.eliminated    - → False
+  leaderboard1.team   - → YJS
+  leaderboard2.team   - → INW
+  leaderboard3.team   - → GBA
+  leaderboard4.team   - → GNS
+  leaderboard5.team   - → DTS
+  leaderboard6.team   - → FN
+  leaderboard7.team   - → ROX
+  leaderboard8.team   - → BS
+  slot1.ts            - → 1.0
+  slot1.ks            - → 1.0
+  slot3.ts            - → 2.5
+  slot3.ks            - → 2.5
+  slot4.ts            - → 0.5
+  slot4.ks            - → 0.5
+  slot6.ts            - → 2.5
+  slot6.ks            - → 2.5
+  leaderboard1.score  - → 39.0
+  leaderboard2.score  - → 30.5
+  leaderboard3.score  - → 27.5
+  leaderboard4.score  - → 20.5
+  leaderboard5.score  - → 20.5
+  leaderboard6.score  - → 18.0
+  leaderboard7.score  - → 5.0
+  leaderboard8.score  - → 7.5
+  review: slot2.ks, slot2.ts, slot5.ks, slot5.ts, slot7.ks, slot7.ts, slot8.ks, slot8.ts
+[00:00:01] #1 ingame R3 (85 ms)
+  slot7.ts  - → 1.0
+  slot7.ks  - → 1.0
+[00:00:02] #2 ingame R3 (87 ms)
+  leaderboard7.score  5.0 → 15.0
+  leaderboard8.score  7.5 → 75.0
+  review: slot3.ts
+[00:00:04] #4 ingame R3 (68 ms)
+  slot3.ts            2.5 → 3.0
+  slot3.ks            2.5 → 3.0
+  leaderboard7.score  15.0 → 1.0
+  leaderboard8.score  75.0 → 7.5
+[00:00:05] #5 ingame R3 (61 ms)
+  review: slot1.ks, slot1.ts
+[00:00:07] #7 ingame R3 (62 ms)
+  slot3.ts  3.0 → 3.5
+  slot3.ks  3.0 → 3.5
+[00:00:08] #8 ingame R3 (74 ms)
+  slot6.eliminated    False → True
+  leaderboard7.score  1.0 → 15.0
+[00:00:10] #10 unknown (1 ms)
+  screen  ingame → unknown
+[00:00:12] #12 ingame R3 (76 ms)
+  screen  unknown → ingame
+  review: slot3.ks
+[00:00:13] #13 ingame R3 (66 ms)
+  review: slot4.ks
+[00:00:15] #15 ingame (65 ms)
+  review: round
+[00:00:16] #16 ingame R3 (87 ms)
+  review: slot6.ts
+[00:00:20] #20 ingame R3 (74 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot6.ts
+[00:00:22] #22 ingame R3 (66 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:00:23] #23 ingame R3 (66 ms)
+  review: slot6.ks
+[00:00:24] #24 ingame R3 (70 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot4.ks
+[00:00:26] #26 ingame R3 (61 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:00:27] #27 ingame R3 (94 ms)
+  review: slot4.ks, slot4.ts
+[00:00:30] #30 ingame R3 (76 ms)
+  review: slot6.ks
+[00:00:31] #31 ingame R3 (83 ms)
+  review: slot4.ts
+[00:00:32] #32 ingame R3 (71 ms)
+  leaderboard7.score  15.0 → 1.0
+  review: slot6.ks, slot8.team
+[00:00:34] #34 ingame R3 (85 ms)
+  leaderboard7.score  1.0 → 15.0
+  review: slot3.ts
+[00:00:36] #36 ingame R3 (231 ms)
+  review: slot4.ks, slot4.ts
+[00:00:37] #37 ingame R3 (189 ms)
+  slot6.eliminated  True → False
+[00:00:38] #38 ingame R3 (149 ms)
+  review: slot4.ts
+[00:00:40] #40 ingame R3 (158 ms)
+  leaderboard7.score  15.0 → 1.0
+  review: slot6.ts
+[00:00:41] #41 ingame R3 (214 ms)
+  review: slot4.ks, slot4.ts
+[00:00:42] #42 ingame R3 (167 ms)
+  slot7.ts  1.0 → 2.0
+  slot7.ks  1.0 → 2.0
+[00:00:43] #43 ingame R3 (198 ms)
+  review: slot6.ks
+[00:00:44] #44 ingame R3 (191 ms)
+  leaderboard7.score  1.0 → 15.0
+[00:00:45] #45 ingame R3 (184 ms)
+  review: slot3.ks
+[00:00:47] #47 ingame R3 (177 ms)
+  review: slot7.ts
+[00:00:48] #48 ingame R3 (168 ms)
+  review: slot3.ks
+[00:00:50] #50 unknown (1 ms)
+  screen  ingame → unknown
+[00:00:52] #52 ingame R3 (137 ms)
+  screen              unknown → ingame
+  slot1.eliminated    False → True
+  slot6.ts            2.5 → 3.5
+  slot6.ks            2.5 → 3.5
+  leaderboard7.score  15.0 → 1.0
+  review: slot4.ks
+[00:00:53] #53 ingame R3 (186 ms)
+  review: slot6.ts
+[00:00:54] #54 ingame R3 (122 ms)
+  leaderboard7.score  1.0 → 15.0
+  leaderboard8.score  7.5 → 75.0
+[00:00:56] #56 ingame R3 (155 ms)
+  leaderboard7.score  15.0 → 1.0
+  leaderboard8.score  75.0 → 7.5
+[00:00:57] #57 ingame R3 (168 ms)
+  slot5.team          INW → ROX
+  leaderboard7.score  1.0 → 15.0
+  review: slot3.ts
+[00:00:58] #58 ingame R3 (240 ms)
+  slot5.team  ROX → INW
+[00:01:02] #62 ingame R3 (111 ms)
+  slot5.ts  - → 1.0
+  slot5.ks  - → 1.0
+[00:01:03] #63 ingame R3 (204 ms)
+  review: slot1.ks, slot3.ks, slot3.ts
+[00:01:04] #64 ingame R3 (159 ms)
+  slot7.eliminated    False → True
+  leaderboard7.score  15.0 → 1.0
+  review: slot6.ks
+[00:01:05] #65 ingame R3 (163 ms)
+  leaderboard7.score  1.0 → 15.0
+[00:01:06] #66 ingame R3 (189 ms)
+  review: slot5.ks, slot5.ts, slot6.ks
+[00:01:08] #68 ingame R3 (147 ms)
+  review: slot4.ks
+[00:01:10] #70 ingame R3 (172 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:01:12] #72 ingame R3 (133 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:01:16] #76 ingame R3 (145 ms)
+  review: slot4.ks
+[00:01:17] #77 ingame R3 (179 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:01:18] #78 ingame R3 (144 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:01:20] #80 ingame R3 (152 ms)
+  review: slot3.ks
+[00:01:23] #83 ingame R3 (180 ms)
+  review: slot5.ks, slot5.ts
+[00:01:24] #84 ingame R3 (199 ms)
+  review: slot6.ks, slot6.ts
+[00:01:26] #86 ingame R3 (144 ms)
+  review: slot3.ts
+[00:01:27] #87 ingame R3 (194 ms)
+  slot1.eliminated  True → False
+  review: slot5.ts
+[00:01:28] #88 ingame R3 (143 ms)
+  review: slot5.ks
+[00:01:29] #89 ingame R3 (182 ms)
+  review: slot3.ts
+[00:01:30] #90 ingame R3 (147 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:01:31] #91 ingame R3 (148 ms)
+  slot7.eliminated  True → False
+[00:01:33] #93 ingame R30 (182 ms)
+  round  3 → 30
+[00:01:34] #94 ingame R3 (130 ms)
+  round  30 → 3
+[00:01:35] #95 ingame R3 (173 ms)
+  review: slot4.ks
+[00:01:36] #96 ingame R3 (210 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot5.ks, slot5.ts
+[00:01:40] #100 ingame R3 (147 ms)
+  review: slot5.ts
+[00:01:42] #102 ingame R3 (111 ms)
+  slot1.team          GBA → ROX
+  slot2.ts            - → 1.0
+  slot2.ks            - → 1.0
+  leaderboard8.score  7.5 → 75.0
+  review: slot1.ks, slot1.ts
+[00:01:43] #103 ingame R3 (181 ms)
+  slot1.team  ROX → GBA
+[00:01:45] #105 ingame R3 (136 ms)
+  slot1.eliminated  False → True
+[00:01:46] #106 ingame R3 (128 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot3.ks, slot5.ks, slot5.ts
+[00:01:49] #109 ingame R3 (131 ms)
+  review: slot5.ks, slot5.ts
+[00:01:50] #110 ingame R3 (163 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot3.ks
+[00:01:51] #111 ingame R3 (147 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot6.ts
+[00:01:53] #113 ingame R3 (160 ms)
+  review: slot2.ts
+[00:01:54] #114 ingame R3 (131 ms)
+  review: slot3.ks, slot4.ks
+[00:01:56] #116 ingame R3 (143 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot4.ks, slot4.ts
+[00:01:58] #118 ingame R3 (131 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:02:03] #123 ingame R3 (153 ms)
+  review: slot4.ks, slot5.ks
+[00:02:04] #124 ingame R3 (148 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot4.ts, slot6.ks
+[00:02:05] #125 ingame R3 (134 ms)
+  review: slot5.ks
+[00:02:06] #126 ingame R3 (120 ms)
+  review: slot6.ks, slot7.ks, slot8.team
+[00:02:07] #127 ingame R3 (231 ms)
+  review: slot6.ts
+[00:02:08] #128 ingame R3 (134 ms)
+  review: slot4.ks, slot4.ts
+[00:02:09] #129 ingame R3 (176 ms)
+  review: slot3.ks, slot6.ts, slot7.ts
+[00:02:11] #131 ingame R3 (64 ms)
+  review: slot6.ks, slot6.ts, slot7.ts
+[00:02:14] #134 ingame R3 (78 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:02:15] #135 ingame R3 (81 ms)
+  review: slot7.ks, slot7.ts
+[00:02:16] #136 ingame R3 (63 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot3.ks
+[00:02:18] #138 unknown (1 ms)
+  screen  ingame → unknown
+[00:02:20] #140 ingame R3 (76 ms)
+  screen  unknown → ingame
+  review: slot3.ks
+[00:02:22] #142 ingame R3 (58 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:02:23] #143 ingame R3 (59 ms)
+  slot1.eliminated  True → False
+[00:02:24] #144 unknown (1 ms)
+  screen  ingame → unknown
+[00:02:26] #146 ingame R3 (65 ms)
+  screen  unknown → ingame
+  review: slot7.ts
+[00:02:28] #148 ingame R3 (64 ms)
+  review: slot4.ks
+[00:02:29] #149 ingame R3 (81 ms)
+  review: slot4.ts
+[00:02:31] #151 ingame R3 (120 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot4.ts
+[00:02:32] #152 ingame R3 (64 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:02:33] #153 ingame R3 (61 ms)
+  review: slot7.ks, slot7.ts
+[00:02:34] #154 ingame R3 (60 ms)
+  review: slot4.ks, slot4.ts
+[00:02:39] #159 ingame R3 (61 ms)
+  review: slot6.ks
+[00:02:40] #160 ingame R3 (59 ms)
+  review: slot3.ts
+[00:02:42] #162 unknown (1 ms)
+  screen  ingame → unknown
+[00:02:44] #164 ingame R3 (67 ms)
+  screen  unknown → ingame
+[00:02:46] #166 ingame R3 (59 ms)
+  slot8.ts  - → 1.0
+  slot8.ks  - → 1.0
+[00:02:49] #169 ingame R3 (48 ms)
+  review: slot3.ks
+[00:02:51] #171 ingame R3 (74 ms)
+  review: slot1.ks, slot1.ts
+[00:02:52] #172 ingame R3 (57 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:02:53] #173 ingame R3 (79 ms)
+  review: slot2.ks, slot2.ts
+[00:02:54] #174 ingame R3 (69 ms)
+  slot6.eliminated    False → True
+  leaderboard8.score  75.0 → 7.5
+  review: slot1.ks, slot1.ts
+[00:02:55] #175 ingame R3 (76 ms)
+  slot8.ts  1.0 → 2.0
+  slot8.ks  1.0 → 2.0
+  review: slot3.ks, slot3.ts
+[00:02:58] #178 ingame R3 (70 ms)
+  slot1.ts  1.0 → 2.0
+  review: slot3.ks, slot3.ts, slot4.ts
+[00:02:59] #179 ingame R3 (80 ms)
+  review: slot1.ts, slot6.ks
+[00:03:00] #180 ingame R3 (46 ms)
+  slot1.ts  2.0 → 1.0
+[00:03:01] #181 ingame R3 (82 ms)
+  review: slot4.ks, slot4.ts, slot8.ks, slot8.ts
+[00:03:03] #183 ingame R3 (48 ms)
+  review: slot4.ts
+[00:03:04] #184 ingame R3 (81 ms)
+  review: slot7.ks, slot7.ts
+[00:03:06] #186 unknown (1 ms)
+  screen  ingame → unknown
+[00:03:08] #188 ingame R3 (60 ms)
+  screen              unknown → ingame
+  slot5.ts            1.0 → 2.0
+  slot5.ks            1.0 → 2.0
+  leaderboard8.score  7.5 → 75.0
+[00:03:09] #189 ingame R3 (55 ms)
+  review: slot2.ks, slot2.ts
+[00:03:10] #190 ingame R3 (61 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot4.ks
+[00:03:11] #191 ingame R3 (52 ms)
+  review: slot6.ks
+[00:03:12] #192 unknown (1 ms)
+  screen  ingame → unknown
+[00:03:22] #202 ingame R3 (119 ms)
+  screen            unknown → ingame
+  slot7.eliminated  False → True
+  slot5.ts          2.0 → 3.0
+  slot5.ks          2.0 → 3.0
+  review: slot3.ks, slot3.ts
+[00:03:24] #204 ingame R3 (130 ms)
+  review: slot6.ks
+[00:03:25] #205 ingame R3 (192 ms)
+  slot3.ts  3.5 → 5.0
+  slot3.ks  3.5 → 5.0
+  review: slot5.ks, slot5.ts
+[00:03:26] #206 ingame R3 (142 ms)
+  slot4.eliminated  False → True
+  review: slot6.ts
+[00:03:27] #207 ingame R3 (154 ms)
+  review: slot3.ts
+[00:03:28] #208 unknown (1 ms)
+  screen  ingame → unknown
+[00:03:29] #209 ingame R3 (173 ms)
+  screen              unknown → ingame
+  leaderboard8.score  7.5 → 75.0
+  review: slot5.ks, slot5.ts
+[00:03:30] #210 ingame R3 (136 ms)
+  slot6.eliminated    True → False
+  leaderboard8.score  75.0 → 7.5
+[00:03:32] #212 ingame R3 (131 ms)
+  review: slot3.ks, slot3.ts
+[00:03:33] #213 ingame R3 (176 ms)
+  review: slot6.ks, slot8.ts
+[00:03:34] #214 ingame R3 (139 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:03:38] #218 ingame R3 (122 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:03:39] #219 ingame R3 (131 ms)
+  slot4.eliminated  True → False
+[00:03:40] #220 ingame R3 (140 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:03:43] #223 ingame R3 (128 ms)
+  review: slot2.ts
+[00:03:46] #226 ingame R3 (111 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot5.ks
+[00:03:48] #228 ingame R3 (123 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:03:49] #229 ingame R3 (130 ms)
+  review: slot8.ks
+[00:03:50] #230 ingame R3 (94 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:03:51] #231 ingame R3 (141 ms)
+  slot7.eliminated  True → False
+  review: slot4.ks
+[00:03:56] #236 unknown (1 ms)
+  screen  ingame → unknown
+[00:03:58] #238 ingame R3 (123 ms)
+  screen  unknown → ingame
+  review: slot2.ks
+[00:04:03] #243 ingame R3 (147 ms)
+  slot3.ks  5.0 → 6.0
+[00:04:04] #244 ingame R3 (145 ms)
+  slot3.ts  5.0 → 6.0
+[00:04:05] #245 ingame R3 (113 ms)
+  slot4.eliminated  False → True
+[00:04:08] #248 ingame R3 (129 ms)
+  leaderboard8.score  7.5 → 75.0
+  review: slot6.ts
+[00:04:10] #250 ingame R3 (93 ms)
+  review: slot5.ks
+[00:04:12] #252 ingame R3 (103 ms)
+  review: slot7.ks, slot7.team, slot7.ts
+[00:04:14] #254 unknown (2 ms)
+  screen  ingame → unknown
+[00:04:16] #256 ingame R3 (113 ms)
+  screen              unknown → ingame
+  leaderboard8.score  75.0 → 7.5
+[00:04:18] #258 ingame R3 (104 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:04:20] #260 ingame R3 (108 ms)
+  leaderboard8.score  75.0 → 7.5
+  review: slot1.ts
+[00:04:22] #262 ingame R3 (119 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:04:25] #265 ingame R3 (122 ms)
+  review: slot5.ts
+[00:04:26] #266 ingame R3 (128 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:04:28] #268 ingame R3 (113 ms)
+  review: slot6.ks
+[00:04:32] #272 ingame R3 (127 ms)
+  review: slot3.ks, slot3.ts
+[00:04:33] #273 ingame R3 (128 ms)
+  review: slot4.ks
+[00:04:38] #278 ingame R3 (99 ms)
+  slot4.eliminated  True → False
+[00:04:40] #280 ingame R3 (163 ms)
+  review: slot4.ks
+[00:04:41] #281 ingame R3 (155 ms)
+  review: slot6.ts
+[00:04:43] #283 unknown (1 ms)
+  screen  ingame → unknown
+exit=124

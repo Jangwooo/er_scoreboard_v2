@@ -1,0 +1,289 @@
+[stream] 시작: [🔴LIVE] 승자조 | KEL 서킷4 | 2026 대한민국 이스포츠 리그 2026-10-11 09:24 (라이브, 1.0 fps)
+[00:00:00] #0 camera (5 ms)
+  screen  - → camera
+[00:05:20] #320 unknown (1 ms)
+  screen  camera → unknown
+[00:08:58] #538 ingame R3 (211 ms)
+  screen              unknown → ingame
+  round               - → 3
+  slot1.team          - → GBA
+  slot1.eliminated    - → False
+  slot2.team          - → DTS
+  slot2.eliminated    - → False
+  slot3.team          - → BS
+  slot3.eliminated    - → False
+  slot4.team          - → ROX
+  slot4.eliminated    - → False
+  slot5.team          - → INW
+  slot5.eliminated    - → False
+  slot6.team          - → GNS
+  slot6.eliminated    - → False
+  slot7.team          - → FN
+  slot7.eliminated    - → False
+  slot8.team          - → YJS
+  slot8.eliminated    - → False
+  leaderboard1.team   - → YJS
+  leaderboard2.team   - → INW
+  leaderboard3.team   - → GBA
+  leaderboard4.team   - → GNS
+  leaderboard5.team   - → DTS
+  leaderboard6.team   - → FN
+  leaderboard7.team   - → ROX
+  leaderboard8.team   - → BS
+  leaderboard1.score  - → 39.0
+  leaderboard2.score  - → 30.5
+  leaderboard3.score  - → 27.5
+  leaderboard4.score  - → 20.5
+  leaderboard5.score  - → 20.5
+  leaderboard6.score  - → 18.0
+  leaderboard7.score  - → 15.0
+  leaderboard8.score  - → 7.5
+  review: slot1.ks, slot1.ts, slot2.ks, slot2.ts, slot3.ks, slot3.ts, slot4.ks, slot4.ts, slot5.ks, slot5.ts, slot6.ks, slot6.ts, slot7.ks, slot7.ts, slot8.ks, slot8.ts
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=188, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=188, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=188, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=188, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=188, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=77, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=83, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=83, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=104, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+Bottom=0, top=83, base=0, x=0
+
+Total count=0
+Min=0.00 Really=0
+Lower quartile=0.00
+Median=0.00, ile(0.5)=0.00
+Upper quartile=0.00
+Max=0.00 Really=0
+Range=1
+Mean= 0.00
+SD= 0.00
+[00:09:00] #540 ingame R3 (77 ms)
+  review: leaderboard1.score, leaderboard1.team, leaderboard2.score, leaderboard2.team, leaderboard3.score, leaderboard3.team, leaderboard4.score, leaderboard4.team, leaderboard5.score, leaderboard5.team, leaderboard6.score, leaderboard6.team, leaderboard7.score, leaderboard7.team, leaderboard8.score, leaderboard8.team, slot1.team, slot2.team, slot3.team, slot4.team, slot5.team, slot6.team, slot7.team, slot8.team
+[00:09:01] #541 unknown (0 ms)
+  screen  ingame → unknown
+[00:09:15] #555 ingame R3 (112 ms)
+  screen  unknown → ingame
+[00:09:16] #556 ingame R3 (85 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:18] #558 ingame R3 (92 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:20] #560 ingame R3 (82 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:23] #563 ingame R3 (55 ms)
+  review: slot2.team
+[00:09:24] #564 ingame R3 (88 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:28] #568 ingame R3 (96 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:34] #574 ingame R3 (104 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:36] #576 ingame R3 (98 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:38] #578 ingame R3 (88 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:40] #580 ingame R3 (87 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:41] #581 ingame R3 (116 ms)
+  review: slot8.team
+[00:09:46] #586 ingame R3 (113 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:50] #590 ingame R3 (117 ms)
+  leaderboard8.score  7.5 → 75.0
+[00:09:52] #592 ingame R3 (98 ms)
+  leaderboard8.score  75.0 → 7.5
+[00:09:54] #594 ingame R3 (113 ms)
+  review: slot8.team
+[00:09:57] #597 ingame R3 (88 ms)
+  review: slot8.team
+exit=124
